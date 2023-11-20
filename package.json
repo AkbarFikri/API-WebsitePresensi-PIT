@@ -1,0 +1,33 @@
+{
+  "name": "website-absensi-pit",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "jest -i"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.6.0",
+    "joi": "^17.11.0",
+    "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.23.3",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.8",
+    "@types/supertest": "^2.0.16",
+    "babel-jest": "^29.7.0",
+    "express": "^4.18.2",
+    "jest": "^29.7.0",
+    "prisma": "^5.6.0",
+    "supertest": "^6.3.3"
+  }
+}
