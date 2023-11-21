@@ -16,8 +16,10 @@ describe('GET /users', function() {
    it('should return all user', async () => {
         const result = await supertest(app)
             .get('/users')
+    
+        expect(response.status).toBe(200);
+        expect(response.body.data.nama).toBe("test");
    })
 
-   expect(response.status).toBe(200);
-   expect(response.body.data.nama).toBe("test");
+   
 });

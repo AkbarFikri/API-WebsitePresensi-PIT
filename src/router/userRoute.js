@@ -3,6 +3,7 @@ import userController from "../controller/userController.js";
 
 const router = express.Router();
 
+router.get("/", userController.homePage);
 router.get("/users", userController.getUsers);
 router.post("/absensi", userController.postNewAbsen);
 router.get("/absensi/:rapat_id", userController.getDataAbsensiByRapat);

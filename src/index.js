@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(router);
 
 app.listen(3000, () => {
-  console.log("JALAN CUY")
+  console.log("Server started!")
 })
 
 export default {

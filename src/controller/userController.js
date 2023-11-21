@@ -1,5 +1,15 @@
 import userHandle from "../handler/userHandle.js";
 
+const homePage = async (req, res, next) => {
+  try {
+    res.status(200).json({
+      admin : "NGAPAIN KE API HAHHHHH😡😠"
+    })
+  } catch (e) {
+    next(e)
+  }
+}
+
 const getUsers = async (req, res, next) => {
   try {
     const response = await userHandle.getUsers(req.body);
@@ -18,7 +28,8 @@ const postNewAbsen = async (req, res, next) => {
         res.status(200).json({
             status: 200,
             data: {
-              massage : "Data berhasil ditambahkan",
+              rapat_id: response,
+              massage: "Data berhasil ditambahkan",
             },
         })
     } catch (e) {
@@ -54,5 +65,6 @@ export default {
   getUsers,
   postNewAbsen,
   getRapat,
-  getDataAbsensiByRapat
+  getDataAbsensiByRapat,
+  homePage
 };

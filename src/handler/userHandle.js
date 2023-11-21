@@ -39,13 +39,11 @@ const postNewAbsen = async (request) => {
     element.rapat_id = createRapat.id;
   });
 
-  console.log(dataAbsensi);
-
   const createAbsensi = await prisma.absensi.createMany({
     data: dataAbsensi,
   });
 
-  return createAbsensi;
+  return createRapat.id;
 };
 
 const getRapat = async (request) => {
@@ -74,16 +72,28 @@ const getDataAbsensiByRapat = async (request) => {
       link: true,
     },
   });
+  
   const dataAbsensi = await prisma.absensi.findMany({
     where: {
       rapat_id: Number(request.rapat_id),
     },
     select: {
-      rapat_id: true,
       user_id: true,
       status: true,
     },
   });
+  
+  for (const absen of dataAbsensi) {
+    const user = await prisma.user.findUnique({
+      where:{
+        id: absen.user_id
+      },
+      select:{
+        nama: true,
+      }
+    })
+    absen.nama = user.nama
+  }
 
   const result = {};
   result.rapat = dataRapat;
