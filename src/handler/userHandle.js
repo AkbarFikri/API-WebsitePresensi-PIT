@@ -27,31 +27,74 @@ const getUserById = async (request) => {
 const postNewAbsen = async (request) => {
   const dataRapat = request.rapat;
   const dataAbsensi = request.anggota;
-  
+
   const createRapat = await prisma.rapat.create({
     data: dataRapat,
     select: {
       id: true,
-    }
+    },
   });
 
-  dataAbsensi.forEach(element => {
+  dataAbsensi.forEach((element) => {
     element.rapat_id = createRapat.id;
-  }); 
+  });
 
   console.log(dataAbsensi);
 
   const createAbsensi = await prisma.absensi.createMany({
-    data: dataAbsensi
+    data: dataAbsensi,
   });
 
-  
+  return createAbsensi;
+};
 
-  return createAbsensi
+const getRapat = async (request) => {
+  const result = await prisma.rapat.findMany({
+    select: {
+      id: true,
+      ke: true,
+      tanggal: true,
+      tempat: true,
+    },
+  });
+
+  return result;
+};
+
+const getDataAbsensiByRapat = async (request) => {
+  const dataRapat = await prisma.rapat.findUnique({
+    where: {
+      id: Number(request.rapat_id),
+    },
+    select: {
+      id: true,
+      ke: true,
+      tanggal: true,
+      tempat: true,
+      link: true,
+    },
+  });
+  const dataAbsensi = await prisma.absensi.findMany({
+    where: {
+      rapat_id: Number(request.rapat_id),
+    },
+    select: {
+      rapat_id: true,
+      user_id: true,
+      status: true,
+    },
+  });
+
+  const result = {};
+  result.rapat = dataRapat;
+  result.absensi = dataAbsensi;
+  return result;
 };
 
 export default {
   getUsers,
   getUserById,
   postNewAbsen,
+  getRapat,
+  getDataAbsensiByRapat,
 };
