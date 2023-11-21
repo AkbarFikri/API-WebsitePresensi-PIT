@@ -8,7 +8,7 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
-  relationMode = "prisma"
+  // relationMode = "prisma"
 }
 
 model User {
@@ -20,17 +20,18 @@ model User {
 
 model Rapat {
   id      Int       @id @default(autoincrement())
-  ke      Int
-  tanggal DateTime
+  ke      String
+  tanggal String
   tempat  String
+  link    String
   Absensi Absensi[]
 }
 
 model Absensi {
   id       Int    @id @default(autoincrement())
   user     User   @relation(fields: [user_id], references: [id])
-  user_id  Int    @unique
+  user_id  Int
   rapat    Rapat  @relation(fields: [rapat_id], references: [id])
-  rapat_id Int    @unique
+  rapat_id Int
   status   String
 }
