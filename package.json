@@ -5,7 +5,8 @@
   "type": "module",
   "main": "./src/index.js",
   "scripts": {
-    "test": "jest -i"
+    "test": "jest -i",
+    "vercel build": "prisma generate"
   },
   "jest": {
     "transform": {
