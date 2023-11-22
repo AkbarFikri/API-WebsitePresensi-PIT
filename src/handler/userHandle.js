@@ -90,9 +90,11 @@ const getDataAbsensiByRapat = async (request) => {
       },
       select:{
         nama: true,
+        role: true,
       }
     })
     absen.nama = user.nama
+    absen.role = user.role
   }
 
   const result = {};
