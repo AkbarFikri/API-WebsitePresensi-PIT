@@ -39,7 +39,7 @@ const postNewAbsen = async (request) => {
     element.rapat_id = createRapat.id;
   });
 
-  const createAbsensi = await prisma.absensi.createMany({
+  await prisma.absensi.createMany({
     data: dataAbsensi,
   });
 
