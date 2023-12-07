@@ -72,30 +72,22 @@ const getDataAbsensiByRapat = async (request) => {
       link: true,
     },
   });
-  
+
   const dataAbsensi = await prisma.absensi.findMany({
     where: {
       rapat_id: Number(request.rapat_id),
     },
     select: {
-      user_id: true,
       status: true,
+      user: {
+        select: {
+          id: true,
+          nama: true,
+          role: true
+        },
+      },
     },
   });
-  
-  for (const absen of dataAbsensi) {
-    const user = await prisma.user.findUnique({
-      where:{
-        id: absen.user_id
-      },
-      select:{
-        nama: true,
-        role: true,
-      }
-    })
-    absen.nama = user.nama
-    absen.role = user.role
-  }
 
   const result = {};
   result.rapat = dataRapat;

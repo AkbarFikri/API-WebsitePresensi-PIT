@@ -12,7 +12,3 @@ app.use(router);
 app.listen(3000, () => {
   console.log("Server started!")
 })
-
-export default {
-  app
-}

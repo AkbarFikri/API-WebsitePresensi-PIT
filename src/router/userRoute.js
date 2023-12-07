@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/", userController.homePage);
 router.get("/users", userController.getUsers);
 router.post("/absensi", userController.postNewAbsen);
-router.get("/absensi/:rapat_id", userController.getDataAbsensiByRapat);
+router.get("/rapat/:rapat_id/absensi", userController.getDataAbsensiByRapat);
 router.get("/rapat", userController.getRapat);
 
 export default router;
